@@ -1,25 +1,27 @@
 package com.divx.android.labmaterialprominentcolor;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
 public class CameraRollActivity extends Activity {
-    private ListView mListView;
+    private GridView mCameraRollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_roll);
 
-        mListView = (ListView) findViewById(R.id.cameraRoll);
+        mCameraRollView = (GridView) findViewById(R.id.cameraRoll);
 
         Cursor cursor = getContentResolver().query(
                 MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI,
@@ -30,11 +32,11 @@ public class CameraRollActivity extends Activity {
 
         ListAdapter adapter = new SimpleCursorAdapter(
                 this,
-                android.R.layout.simple_list_item_1,
+                R.layout.grid_item,
                 cursor,
                 new String[] { MediaStore.Video.Thumbnails.DATA },
-                new int[] { android.R.id.text1 },
+                new int[] { R.id.thumbnailUri },
                 0);
-        mListView.setAdapter(adapter);
+        mCameraRollView.setAdapter(adapter);
     }
 }

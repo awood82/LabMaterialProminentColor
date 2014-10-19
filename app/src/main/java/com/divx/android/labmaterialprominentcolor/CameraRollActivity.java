@@ -1,15 +1,14 @@
 package com.divx.android.labmaterialprominentcolor;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 
@@ -38,5 +37,12 @@ public class CameraRollActivity extends Activity {
                 new int[] { R.id.thumbnailUri },
                 0);
         mCameraRollView.setAdapter(adapter);
+
+        mCameraRollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ((ImageView)view.findViewById(R.id.thumbnailUri)).setColorFilter(0xAA009999);
+            }
+        });
     }
 }
